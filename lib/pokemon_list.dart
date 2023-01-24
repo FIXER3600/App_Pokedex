@@ -13,6 +13,7 @@ class PokemonListPage extends StatefulWidget {
 
 class _PokemonListPageState extends State<PokemonListPage> {
   List<Data> pokeList = [];
+  bool loading = true;
   @override
   void initState() {
     getPokemons();
@@ -28,6 +29,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
           for (var element in (json['data'] as List)) {
             pokeList.add(Data.fromJson(element));
           }
+          loading = false;
         });
       }
     });
@@ -46,11 +48,11 @@ class _PokemonListPageState extends State<PokemonListPage> {
           ),
         ),
       ]),
-      body: ListView.builder(
+      body: loading == false ? ListView.builder(
         itemCount: pokeList.length,
         itemBuilder: ((context, index) => pokeList.isEmpty
             ? const Text('Lista vazia')
-            : Padding(
+            :  Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Card(
                     child: Padding(
@@ -69,7 +71,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
                       }),
                 )),
               )),
-      ),
+      ):const Center(child: CircularProgressIndicator()),
     );
   }
 }
