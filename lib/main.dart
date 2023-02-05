@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/details.dart';
-import 'package:pokedex/pokemon_list.dart';
+import 'package:pokedex/presenter/data_presenter.dart';
+import 'view/pages/details.dart';
+import 'view/pages/pokemon_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: 'list',
       routes: {
-        'list': (context) => const PokemonListPage(),
+        'list': (context) => PokemonListPage(DataPresenter()),
         'details': (context) => const DetailsPage(),
       },
       title: 'Pokedex',

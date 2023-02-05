@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/data.dart';
+import 'package:pokedex/presenter/entities/data_entity.dart';
 
 class DetailsPage extends StatelessWidget {
-  final Data? data;
-  const DetailsPage({this.data, super.key});
+  const DetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Data;
+    final args = ModalRoute.of(context)!.settings.arguments as DataEntity;
     return Scaffold(
       appBar: AppBar(
         title: Text("${args.name}"),
@@ -64,7 +63,7 @@ class DetailsPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          for (var e in args.type!) Text(e.padRight(8)),
+                          for (var e in args.types!) Text(e.padRight(8)),
                         ],
                       ),
                       const SizedBox(
