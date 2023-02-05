@@ -1,5 +1,3 @@
-import 'package:pokedex/presenter/entities/pokemon_entity.dart';
-
 class DataEntity {
   String? name;
   String? thumbnailImage;
