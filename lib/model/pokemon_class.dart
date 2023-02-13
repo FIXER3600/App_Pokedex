@@ -1,30 +1,33 @@
-import 'data.dart';
-
 class Pokemon {
-  bool? op;
-  String? msg;
-  List<Data>? data;
+  String? name;
+  String? thumbnailImage;
+  String? number;
+  String? description;
+  List<String>? types;
+  List<String>? weakness;
 
-  Pokemon({this.op, this.msg, this.data});
-
+  Pokemon(
+      {this.name,
+      this.thumbnailImage,
+      this.number,
+      this.description,
+      this.types,
+      this.weakness});
   Pokemon.fromJson(Map<String, dynamic> json) {
-    op = json['op'];
-    msg = json['msg'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
+    weakness = json['weakness'].cast<String>();
+    number = json['number'];
+    description = json['description'];
+    name = json['name'];
+    thumbnailImage = json['thumbnailImage'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['op'] = op;
-    data['msg'] = msg;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
+    data['weakness'] = weakness;
+    data['number'] = number;
+    data['description'] = description;
+    data['name'] = name;
+    data['thumbnailImage'] = thumbnailImage;
     return data;
   }
 }

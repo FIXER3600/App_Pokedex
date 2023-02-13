@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/presenter/entities/data_entity.dart';
+
+import '../../model/pokemon_class.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({super.key});
+  final Pokemon pokemon;
+  const DetailsPage({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as DataEntity;
     return Scaffold(
       appBar: AppBar(
-        title: Text("${args.name}"),
+        title: Text("${pokemon.name}"),
       ),
       body: Center(
           child: Column(
@@ -34,9 +35,9 @@ class DetailsPage extends StatelessWidget {
                           Align(
                               alignment: Alignment.topRight,
                               child: Text(
-                                '#${args.number}',
+                                '#${pokemon.number}',
                               )),
-                          Image.network('${args.thumbnailImage}')
+                          Image.network('${pokemon.thumbnailImage}')
                         ],
                       ),
                     ),
@@ -46,9 +47,9 @@ class DetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
-                      Text('${args.description}' == ""
+                      Text('${pokemon.description}' == ""
                           ? 'Este Pokémon não apresenta nenhuma descrição'
-                          : '${args.description}'),
+                          : '${pokemon.description}'),
                       const SizedBox(
                         height: 10,
                       ),
@@ -63,7 +64,7 @@ class DetailsPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          for (var e in args.types!) Text(e.padRight(8)),
+                          for (var e in pokemon.types!) Text(e.padRight(8)),
                         ],
                       ),
                       const SizedBox(
@@ -79,7 +80,7 @@ class DetailsPage extends StatelessWidget {
                               style: TextStyle(fontWeight: FontWeight.bold))),
                       Row(
                         children: [
-                          for (var e in args.weakness!) Text(e.padRight(8))
+                          for (var e in pokemon.weakness!) Text(e.padRight(8))
                         ],
                       )
                     ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/presenter/data_presenter.dart';
-import 'view/pages/details.dart';
-import 'view/pages/pokemon_list.dart';
+import 'package:pokedex/model/api/pokemon_api.dart';
+import 'package:pokedex/presenter/pokemon_presenter.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,16 +13,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: 'list',
-      routes: {
-        'list': (context) => PokemonListPage(DataPresenter()),
-        'details': (context) => const DetailsPage(),
-      },
-      title: 'Pokedex',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        Provider(create: (_) => PokemonApi()),
+        ChangeNotifierProvider(
+          create: (context) => PokemonPresenter(context.read()),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: 'list',
+        title: 'Pokedex',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
       ),
     );
   }
